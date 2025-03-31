@@ -1,9 +1,8 @@
 import express, { response } from 'express'
-import mongoose from 'mongoose'
 
 import cors from 'cors'
 import 'dotenv/config'
-import connectDB from './confiig/mongoDb.js'
+import connectDB from './confiig/mongodb.js'
 import connectCloudinary from './confiig/cloudinary.js'
 import adminRouter from './routes/adminRoute.js'
 import doctorRouter from './routes/doctorRoute.js'
