@@ -4,7 +4,6 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext';
 import { FiHome } from "react-icons/fi";
 import { FaUserDoctor } from "react-icons/fa6";
-import { MdOutlineMiscellaneousServices } from "react-icons/md";
 import { LuContactRound } from "react-icons/lu";
 import { BsPassportFill } from "react-icons/bs";
 import './navbar.css'
@@ -20,7 +19,7 @@ const Navbar = () => {
     }
   return (
     <div className='flex items-center justify-between text-sm py-4 mb-5 border-b border-b-gray-400'>
-      <img onClick={()=>navigate('/')} className='w-44 cursor-pointer' src={assets.logo3} alt="" />
+      <img onClick={()=>navigate('/')} className='w-44 cursor-pointer' src={assets.logo} alt="" />
       <ul className='hidden md:flex items-start gap-5 font-medium'>
         <NavLink to='/'>
             <li className='py-1'>Home</li>
