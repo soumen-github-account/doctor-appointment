@@ -6,6 +6,7 @@ import { FiHome } from "react-icons/fi";
 import { FaUserDoctor } from "react-icons/fa6";
 import { LuContactRound } from "react-icons/lu";
 import { BsPassportFill } from "react-icons/bs";
+import { IoBagAddSharp } from "react-icons/io5";
 import './navbar.css'
 const Navbar = () => {
     const navigate = useNavigate();
@@ -27,6 +28,10 @@ const Navbar = () => {
         </NavLink>
         <NavLink to='/doctors'>
             <li className='py-1'>All Doctors</li>
+            <hr className='border-none outline-none h-0.5 bg-[#007E85] w-3/5 m-auto hidden' />
+        </NavLink>
+        <NavLink to='/my-appointment'>
+            <li className='py-1'>Appointments</li>
             <hr className='border-none outline-none h-0.5 bg-[#007E85] w-3/5 m-auto hidden' />
         </NavLink>
         <NavLink to='/about'>
@@ -74,6 +79,13 @@ const Navbar = () => {
         </li>
 
         <li className="nav__item">
+            <NavLink onClick={()=>setColor('appoint')} to='/my-appointment' className="nav__link">
+            <IoBagAddSharp className={color=='appoint' ? 'text-[#007E85] nav__icon' :'nav__icon'} />
+                <span className="nav__name">Appointments</span>
+            </NavLink>
+        </li>
+
+        <li className="nav__item">
             <NavLink onClick={()=>setColor('service')} to='/about' className="nav__link">
                 <BsPassportFill className={color=='service' ? 'text-[#007E85] nav__icon' :'nav__icon'} />
                 <span className="nav__name">About</span>
@@ -100,7 +112,7 @@ const Navbar = () => {
         </div>
         <ul className='flex flex-col items-center gap-2 mt-5 text-lg font-medium'>
           <NavLink className='px-4 py-2 rounded inline-block' to='/my-profile' onClick={()=>setShowMenu(false)}>My Profile</NavLink>
-          <NavLink className='px-4 py-2 rounded inline-block' to='/my-appointment' onClick={()=>setShowMenu(false)}>All doctor</NavLink>
+          {/* <NavLink className='px-4 py-2 rounded inline-block' to='/my-appointment' onClick={()=>setShowMenu(false)}>All doctor</NavLink> */}
           <NavLink className='px-4 py-2 rounded inline-block' onClick={logout}>Logout</NavLink>
         </ul>
       </div>
