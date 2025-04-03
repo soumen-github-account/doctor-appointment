@@ -20,7 +20,7 @@ const Navbar = () => {
     }
   return (
     <div className='flex items-center justify-between text-sm py-4 mb-5 border-b border-b-gray-400'>
-      <img onClick={()=>navigate('/')} className='w-44 cursor-pointer' src={assets.logo} alt="" />
+      <img onClick={()=>{navigate('/'); scrollTo(0,0)}} className='w-44 cursor-pointer' src={assets.logo} alt="" />
       <ul className='hidden md:flex items-start gap-5 font-medium'>
         <NavLink to='/'>
             <li className='py-1'>Home</li>
@@ -57,7 +57,7 @@ const Navbar = () => {
                 </div>
             </div> */}
             </div>
-            : <button onClick={()=>navigate('/login')} className='bg-[#007E85] text-white px-8 py-3 rounded-full font-light hidden md:block cursor-pointer'>Create Account</button> 
+            : <button onClick={()=>{navigate('/login'); scrollTo(0,0)}} className='bg-[#007E85] text-white px-8 py-3 rounded-full font-light hidden md:block cursor-pointer'>Create Account</button> 
         }
         {/* <img className='w-6 md:hidden' src={assets.menu_icon} alt="" /> */}
       {/* ----------mobile menu----------*/}
@@ -65,35 +65,35 @@ const Navbar = () => {
       <div className='bg-gray-200 nav__menu' id="nav-menu">
       <ul className="nav__list">
         <li className="nav__item">
-            <NavLink onClick={()=>setColor('home')} to='/' className="nav__link active-link">
+            <NavLink onClick={()=>{setColor('home'); scrollTo(0,0)}} to='/' className="nav__link active-link">
                 <FiHome className={color=='home' ? 'text-[#007E85] nav__icon' :'nav__icon'} />
                 <span className="nav__name">Home</span>
             </NavLink>
         </li>
 
         <li className="nav__item">
-            <NavLink onClick={()=>setColor('about')} to='/doctors' className="nav__link">
-            <FaUserDoctor className={color=='about' ? 'text-[#007E85] nav__icon' :'nav__icon'} />
+            <NavLink onClick={()=>{setColor('doctor'); scrollTo(0,0)}} to={'/doctors'} className="nav__link">
+            <FaUserDoctor className={color=='doctor' ? 'text-[#007E85] nav__icon' :'nav__icon'} />
                 <span className="nav__name">All Doctors</span>
             </NavLink>
         </li>
 
         <li className="nav__item">
-            <NavLink onClick={()=>setColor('appoint')} to='/my-appointment' className="nav__link">
+            <NavLink onClick={()=>{setColor('appoint'); scrollTo(0,0)}} to='/my-appointment' className="nav__link">
             <IoBagAddSharp className={color=='appoint' ? 'text-[#007E85] nav__icon' :'nav__icon'} />
                 <span className="nav__name">Appointments</span>
             </NavLink>
         </li>
 
         <li className="nav__item">
-            <NavLink onClick={()=>setColor('service')} to='/about' className="nav__link">
+            <NavLink onClick={()=>{setColor('service') ; scrollTo(0,0)}} to='/about' className="nav__link">
                 <BsPassportFill className={color=='service' ? 'text-[#007E85] nav__icon' :'nav__icon'} />
                 <span className="nav__name">About</span>
             </NavLink>
         </li>
 
         <li class="nav__item">
-            <NavLink onClick={()=>setColor('contact')} to='/contact' className='nav__link'>
+            <NavLink onClick={()=>{setColor('contact'); scrollTo(0,0)}} to='/contact' className='nav__link'>
                 <LuContactRound className={color=='contact' ? 'text-[#007E85] nav__icon' :'nav__icon'}/>
                 <span class="nav__name">Contact</span>
             </NavLink>
