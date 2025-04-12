@@ -4,6 +4,8 @@ import { useContext } from 'react'
 import { AdminContext } from '../../context/AdminContext'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { AppContext } from '../../context/AppContext'
+import { ImSpinner3 } from "react-icons/im";
 const AddDoctor = () => {
 
     const [docImg, setDocImg] = useState(false)
@@ -19,14 +21,16 @@ const AddDoctor = () => {
     const [address2, setAddress2] = useState('')
 
     const { backendUrl, atoken } = useContext(AdminContext)
+    const {loading,setLoading} = useContext(AppContext)
 
     const onSubmiHandler = async(event)=>{
+        
         event.preventDefault()
         try {
             if(!docImg){
                 return toast.error("Image not selected")
             }
-
+            setLoading(true)
             const formData = new FormData()
             formData.append('image', docImg)
             formData.append('name', name)
@@ -47,6 +51,7 @@ const AddDoctor = () => {
             
             if(data.success){
                 toast.success(data.message)
+                setLoading(false)
                 setDocImg(false)
                 setName('')
                 setpassword('')
@@ -141,7 +146,14 @@ const AddDoctor = () => {
                     <p className='mt-4 mb-2'>About Doctor</p>
                     <textarea onChange={(e)=>setAbout(e.target.value)} value={about} className='w-full px-4 pt-2 border rounded' type='text' placeholder='write about doctor' rows={5} required></textarea>
                 </div>
-                <button className='bg-blue-500 px-10 py-3 mt-4 text-white rounded-full' type='submit'>Add Doctor</button>
+                {
+                    loading ? 
+                    <div className={`bg-blue-400 px-10 py-3 mt-4 text-white rounded-full ${loading ? "cursor-no-drop" : ""}`}><ImSpinner3 className='mx-3 animate-spin duration-75'/></div>
+                    
+                    :
+                    <button className='bg-blue-500 px-10 py-3 mt-4 text-white rounded-full' type='submit'>Add Doctor</button>
+
+                }
             </div>
         </div>
         

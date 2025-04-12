@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 
 export const AppContext = createContext()
@@ -6,7 +6,7 @@ export const AppContext = createContext()
 const AppContextProvider = (props)=>{
 
     const currencySymbol = '₹'
-
+    const [loading, setLoading] = useState(false);
     const calculateAge = (dob) =>{
         const today = new Date()
         const birthDate = new Date(dob)
@@ -25,7 +25,8 @@ const AppContextProvider = (props)=>{
     const value = {
         calculateAge,
         slotDataFormate,
-        currencySymbol
+        currencySymbol,
+        loading,setLoading
     }
     return (
         <AppContext.Provider value={value}>
