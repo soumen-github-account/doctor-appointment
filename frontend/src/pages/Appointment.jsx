@@ -5,7 +5,7 @@ import { assets } from '../assets/assets'
 import RelatedDoctors from '../components/RelatedDoctors'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-
+import { ImSpinner3 } from "react-icons/im";
 
 const Appointment = () => {
   const {docId} = useParams()
@@ -16,6 +16,7 @@ const Appointment = () => {
   const [slotIndex, setSlotIndex] = useState(0)
   const [slotTime, setSlotTime] = useState('')
 
+  const [loading, setLoading] = useState(false);
   const dayOfWeeks = ['SUN', 'MON', 'TUE','WED', 'THU', 'FRI', 'SAT']
 
   const navigate = useNavigate()
@@ -86,6 +87,7 @@ const Appointment = () => {
     }
 
     try {
+      setLoading(true)
       const date = docSlots[slotIndex][0].datetime
       let day = date.getDate()
       let month = date.getMonth()+1
@@ -98,13 +100,15 @@ const Appointment = () => {
         toast.success(data.message)
         getDoctorsData()
         navigate('/my-appointment')
-
+        setLoading(false)
       } else{
         toast.error(data.message)
+        setLoading(false)
       }
 
     } catch (error) {
       toast.error(error.message)
+      setLoading(false)
     }
 
   }
@@ -170,7 +174,16 @@ const Appointment = () => {
           </p>
         ))}
       </div>
-      <button onClick={()=>{bookAppointment();scrollTo(0,0)}} className='bg-[#007E85] text-white text-sm font-light px-14 py-3 rounded-full my-6 cursor-pointer'>Book an Appointment</button>
+      {/* <button onClick={()=>{bookAppointment();scrollTo(0,0)}} className='bg-[#007E85] text-white text-sm font-light px-14 py-3 rounded-full my-6 cursor-pointer'>Book an Appointment</button> */}
+        {
+          loading ? 
+          <button className={`bg-[#007E85] text-white text-sm font-light px-14 py-3 rounded-full my-6 cursor-pointer ${loading ? "cursor-no-drop" : ""}`}><ImSpinner3 className='mx-3 animate-spin duration-75'/></button>
+          
+          :
+          <button onClick={()=>{bookAppointment();scrollTo(0,0)}} className='bg-[#007E85] text-white text-sm font-light px-14 py-3 rounded-full my-6 cursor-pointer'>Add Doctor</button>
+
+        }
+    
     </div>
       
         {/*----------------related doctors------------- */}
