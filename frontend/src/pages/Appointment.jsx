@@ -170,7 +170,7 @@ const Appointment = () => {
           </p>
         ))}
       </div>
-      <button onClick={bookAppointment} className='bg-[#007E85] text-white text-sm font-light px-14 py-3 rounded-full my-6 cursor-pointer'>Book an Appointment</button>
+      <button onClick={()=>{bookAppointment();scrollTo(0,0)}} className='bg-[#007E85] text-white text-sm font-light px-14 py-3 rounded-full my-6 cursor-pointer'>Book an Appointment</button>
     </div>
       
         {/*----------------related doctors------------- */}
