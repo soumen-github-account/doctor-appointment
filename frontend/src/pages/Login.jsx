@@ -3,9 +3,11 @@ import { AppContext } from '../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { BiLoaderAlt } from "react-icons/bi";
 
 const Login = () => {
   const { backendUrl, token, setToken } = useContext(AppContext)
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
 
   const [state, setState] = useState('Sign Up')
@@ -17,6 +19,7 @@ const Login = () => {
   const onSubmitHandler = async (event)=>{
     event.preventDefault()
     try {
+      setLoading(true)
       if(state=='Sign Up'){
         const {data} = await axios.post(backendUrl + '/api/user/register', {name,password,email})
         if(data.success){
@@ -36,6 +39,8 @@ const Login = () => {
       }
     } catch (error) {
       toast.error(error.message)
+    } finally{
+      setLoading(false)
     }
 
   }
@@ -66,7 +71,16 @@ const Login = () => {
           <p>Password</p>
           <input className='border border-zinc-300 rounded w-full p-2 mt-1' type="password" onChange={(e)=>setPassword(e.target.value)} value={password} required />
         </div>
-        <button type='submit' className='bg-[#5f6FFF] text-white w-full py-2 rounded-md text-base'>{state === 'Sign Up' ? "Create Account" : "Login"}</button>
+
+        {
+          loading ? 
+            <div className='bg-[#5f6FFF] text-white w-full py-2 rounded-md text-base flex items-center justify-center text-[20px]'>
+              <BiLoaderAlt className='animate-spin'/>
+            </div>
+          :
+            <button type='submit' className='bg-[#5f6FFF] text-white w-full py-2 rounded-md text-base'>{state === 'Sign Up' ? "Create Account" : "Login"}</button>
+        }
+      
       {
         state === 'Sign Up'
         ? <p className=''>Already have an account? <span onClick={()=>setState('Login')} className='text-blue-600 underline cursor-pointer'>Login here</span></p>

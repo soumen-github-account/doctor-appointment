@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
+import CardSkeleton from '../components/CardSkeleton'
 
 
 const Doctors = () => {
@@ -8,7 +9,7 @@ const Doctors = () => {
   const [filterDoc, setFilterDoc] = useState([0])
   const [showFilter, setShowFilter] = useState(false)
   const navigate = useNavigate()
-  const {doctors} = useContext(AppContext)
+  const {doctors, loading} = useContext(AppContext)
   
   const applyFilter = () =>{
     if(speciality){
@@ -22,7 +23,13 @@ const Doctors = () => {
     applyFilter()
   },[doctors, speciality])
 
-  return (
+  return loading ? (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {Array(10).fill().map((_, index) => (
+        <CardSkeleton key={index} />
+      ))}
+    </div>
+  ) : (
     <div>
       <p className='text-gray-600'>Browse through the doctors specialist.</p>
       <div className='flex flex-col sm:flex-row items-start gap-5 mt-5'>

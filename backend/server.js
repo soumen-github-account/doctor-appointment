@@ -15,7 +15,17 @@ connectDB();
 connectCloudinary()
 // midddlewere
 app.use(express.json())
-app.use(cors())
+const allowedOrigin = ['https://doctor-appointment-frontend-rfco.onrender.com', 'http://localhost:5173']
+app.use(cors({
+    origin: function(origin, callback){
+        if(!origin || allowedOrigin.includes(origin)){
+            callback(null, true);
+        } else{
+            callback(new Error('NOT allowed by cors'));
+        }
+    },
+    credentials:true
+}))
 
 // api endpoint
 
